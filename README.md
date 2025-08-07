@@ -254,6 +254,39 @@ For now, this is a unified API perfect for learning and development.
 
 This project is ready for deployment on Render, Railway, or any ASGI-compatible platform.
 
+### Render Deployment
+
+1. **Connect your repository** to Render
+2. **Use the provided `render.yaml`** for automatic configuration
+3. **Or manually configure:**
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - **Environment**: Python 3.11
+
+### Other Platforms
+
+#### Railway
+```bash
+# Railway will auto-detect and use uvicorn
+railway up
+```
+
+#### Heroku
+```bash
+# Create Procfile
+echo "web: uvicorn main:app --host 0.0.0.0 --port \$PORT" > Procfile
+
+# Deploy
+git push heroku main
+```
+
+#### WSGI Servers (Gunicorn)
+If you need WSGI compatibility:
+```bash
+# Use the WSGI wrapper
+gunicorn wsgi:application --bind 0.0.0.0:$PORT
+```
+
 The `main.py` file serves as the entry point and automatically handles port configuration from environment variables.
 
 ## 🛣️ Next Steps
