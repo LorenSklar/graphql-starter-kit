@@ -1,0 +1,36 @@
+# Counter Queries & Mutations Examples
+# Copy and paste these into GraphiQL for testing
+
+# Get current counter value
+query getCounter {
+  counter {
+    value
+  }
+}
+
+# Increment counter by 1
+mutation incrementCounter {
+  incrementCounter {
+    value
+  }
+}
+
+# Set counter to specific value
+mutation setCounter {
+  setCounter(value: 100) {
+    value
+  }
+}
+
+# Test counter workflow
+mutation testCounterWorkflow {
+  setCounter(value: 0) {
+    value
+  }
+  incrementCounter {
+    value
+  }
+  incrementCounter {
+    value
+  }
+} 

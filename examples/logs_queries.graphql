@@ -1,0 +1,131 @@
+# Logs Queries Examples
+# Copy and paste these into GraphiQL for testing
+
+# Get logs with pagination and filtering
+query getLogs {
+  logs(first: 10, offset: 0, log_level: "ERROR", service_name: "user-service") {
+    logs {
+      id
+      TIMESTAMP
+      REQUEST_ID
+      METHOD
+      PATH
+      STATUS_CODE
+      RESPONSE_TIME_MS
+      LOG_LEVEL
+      SERVICE_NAME
+      ENV
+      ERROR_MESSAGE
+    }
+    total_count
+    has_next_page
+    has_previous_page
+  }
+}
+
+# Get single log by ID
+query getSingleLog {
+  log(id: "1") {
+    id
+    TIMESTAMP
+    REQUEST_ID
+    METHOD
+    PATH
+    SOURCE_IP
+    USER_AGENT
+    STATUS_CODE
+    RESPONSE_TIME_MS
+    LOG_LEVEL
+    SERVICE_NAME
+    ENV
+  }
+}
+
+# Get log statistics and analytics
+query getLogStats {
+  logStats {
+    total_logs
+    logs_by_level {
+      level
+      count
+    }
+    logs_by_service {
+      service
+      count
+    }
+    logs_by_status {
+      status_code
+      count
+    }
+    logs_by_env {
+      env
+      count
+    }
+  }
+}
+
+# Get all logs (no filtering)
+query getAllLogs {
+  logs(first: 50, offset: 0) {
+    logs {
+      id
+      TIMESTAMP
+      METHOD
+      PATH
+      STATUS_CODE
+      LOG_LEVEL
+      SERVICE_NAME
+    }
+    total_count
+    has_next_page
+    has_previous_page
+  }
+}
+
+# Get error logs only
+query getErrorLogs {
+  logs(first: 20, offset: 0, log_level: "ERROR") {
+    logs {
+      id
+      TIMESTAMP
+      METHOD
+      PATH
+      STATUS_CODE
+      ERROR_MESSAGE
+      STACK_TRACE
+    }
+    total_count
+  }
+}
+
+# Get logs by service
+query getLogsByService {
+  logs(first: 15, offset: 0, service_name: "payment-service") {
+    logs {
+      id
+      TIMESTAMP
+      METHOD
+      PATH
+      STATUS_CODE
+      RESPONSE_TIME_MS
+      LOG_LEVEL
+    }
+    total_count
+  }
+}
+
+# Get logs with status code filtering
+query getLogsByStatus {
+  logs(first: 10, offset: 0, status_code: 500) {
+    logs {
+      id
+      TIMESTAMP
+      METHOD
+      PATH
+      STATUS_CODE
+      ERROR_MESSAGE
+      SERVICE_NAME
+    }
+    total_count
+  }
+} 

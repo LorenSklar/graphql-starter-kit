@@ -1,0 +1,33 @@
+# Hello/Ping Queries Examples
+# Copy and paste these into GraphiQL for testing
+
+# Test hello functionality
+query testHello {
+  hello {
+    message
+  }
+}
+
+# Hello with custom name
+query helloWithName {
+  hello(name: "Alice") {
+    message
+  }
+}
+
+# Health check ping
+query healthCheck {
+  ping {
+    response
+  }
+}
+
+# Combined hello and ping test
+query combinedTest {
+  hello(name: "World") {
+    message
+  }
+  ping {
+    response
+  }
+} 
